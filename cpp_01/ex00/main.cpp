@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moha <yel-moha@student.42firenze.it>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/10 17:56:14 by yel-moha          #+#    #+#             */
-/*   Updated: 2026/06/10 17:56:24 by yel-moha         ###   ########.fr       */
+/*   Created: 2026/06/12 19:38:50 by yel-moha          #+#    #+#             */
+/*   Updated: 2026/06/12 19:38:52 by yel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "Zombie.hpp"
 
-#include <iostream>
-#include <string>
-
-class Zombie
+int main()
 {
-    private:
-        std::string name;
+    randomChump("Brutto");
+    Zombie *zom = newZombie("Bello");
 
-    public:
-        void announce( void );
-        //void setName(std::string z_name);
-        std::string getName(void);
-        Zombie();
-        Zombie(std::string name);
-        ~Zombie();
-};
+    zom->announce();
+    delete(zom);
 
-Zombie* newZombie( std::string name ); 
-void randomChump( std::string name );
-
-#endif
+}

@@ -14,28 +14,24 @@
    
 void Zombie::announce( void )
 {
-    std::cout << get_name() << "o: BraiiiiiiinnnzzzZ..." << std::endl; 
+    std::cout << getName() << ": BraiiiiiiinnnzzzZ..." << std::endl; 
 }
 Zombie::Zombie()
 {
-    std::cout << "Constructur of a zombie: " << get_name() << std::endl;
+    std::cout << "Constructur of a zombie: " << getName() << std::endl;
 }
-void Zombie::put_name(std::string z_name)
+Zombie::Zombie(std::string name)
 {
-    this->name = z_name;
+    this->name = name;
+    std::cout << "Constructur with a parameter of a zombie: " << getName() << std::endl;
 }
 
-std::string Zombie::get_name(void)
+std::string Zombie::getName(void)
 {
     return(this->name);
 }
-
-Zombie* newZombie( std::string name )
+Zombie::~Zombie()
 {
-    Zombie *zom;
-
-    zom = new Zombie;
-    zom->put_name(name);
-    return(zom);
+    std::cout << "Zombie destroyed" << std::endl;
 }
-void randomChump( std::string name ); // suppongo chiami la funzione sopra
+

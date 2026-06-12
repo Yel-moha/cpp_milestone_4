@@ -1,10 +1,13 @@
 NAME = zombie
 
-SRCS = zombie.cpp
-OBJS = $(SRCS:.cpp.o)
+SRCS = main.cpp \
+Zombie.cpp \
+newZombie.cpp \
+randomChump.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 CC = c++
-CFLAGS = -Werror -Wextra -Wall -std=c++98 -g
+CFLAGS = -Werror -Wextra -Wall -std=c++98
 
 all: $(NAME)
 
@@ -22,4 +25,4 @@ re: fclean all
 %.o: %.cpp
 		$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean fclen re
+.PHONY: all clean fclean re
