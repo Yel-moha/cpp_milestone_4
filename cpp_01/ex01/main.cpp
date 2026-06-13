@@ -14,9 +14,13 @@
 
 int main()
 {
-    randomChump("Brutto");
-    Zombie *zom = newZombie("Bello");
 
-    zom->announce();
-    delete(zom);
+    Zombie *zom = zombieHorde(5, "Foo");
+    
+    for(int i = 0; i < 5; i++)
+    {
+        zom[i].announce();
+    }
+    delete[]zom;
+    return (0);
 }
