@@ -16,13 +16,6 @@ Zombie::Zombie()
 {
     std::cout << "Constructor of a zombie: " << getName() << std::endl;
 }
-/*
-Zombie::Zombie(std::string name)
-{
-    this->name = name;
-    std::cout << "Constructur with a parameter of a zombie: " << getName() << std::endl;
-}
-*/
 
 Zombie::~Zombie()
 {

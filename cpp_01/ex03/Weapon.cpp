@@ -4,16 +4,21 @@
 Weapon::Weapon(/* args */)
 {
 }
-Weapon(std::string name)
+Weapon::Weapon(std::string type)
 {
-    this->type = name;
+    this->type = type;
 }
 
 Weapon::~Weapon()
 {
 }
 
-void Weapon::setType ( std::string const weapon_type)
+void Weapon::setType ( std::string type)
 {
-    this->type = weapon_type;
+    this->type = type;
+}
+
+std::string Weapon::getType()
+{
+    return (this->type);
 }
