@@ -9,7 +9,7 @@ class HumanB
 private:
     /* data */
     std::string name;
-    Weapon *weapon;
+    Weapon* weapon;
 public:
     HumanB();
     HumanB(std::string weapon);

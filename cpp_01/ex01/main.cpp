@@ -12,12 +12,15 @@
 
 #include "Zombie.hpp"
 
+
 int main()
 {
-
-    Zombie *zom = zombieHorde(5, "Foo");
+    const int num_zom = 5;
+    Zombie *zom = zombieHorde(num_zom, "Foo");
     
-    for(int i = 0; i < 5; i++)
+    if(!zom)
+        return (0);
+    for(int i = 0; i < num_zom; i++)
         zom[i].announce();
     delete[] zom;
     return (0);

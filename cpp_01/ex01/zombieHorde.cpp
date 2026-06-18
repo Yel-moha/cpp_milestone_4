@@ -14,9 +14,16 @@
 
 Zombie* zombieHorde( int N, std::string name )
 {
-    Zombie *horde = new Zombie[N];
-    
-    for(int i = 0; i < N; i++)
-        horde[i].setName(name);
-    return(horde);
+    if(N > 0)
+    {
+        Zombie *horde = new Zombie[N];
+        for(int i = 0; i < N; i++)
+            horde[i].setName(name);
+        return(horde);
+    }
+    else
+    {
+        std::cout << "N can not be less than 0" << std::endl;
+        return (NULL);
+    }
 }
