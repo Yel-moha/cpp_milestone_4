@@ -7,6 +7,10 @@ Fixed::Fixed(void) // Costruttore di default
     this->fixed = 0;
     std::cout << "Default constructor called" << std::endl;
 }
+Fixed::Fixed(const int num)
+{
+
+}
 
 // Costruttore di copia: Fixed::Fixed(const Fixed &other)
 // Fixed: È il nome della funzione.
