@@ -16,7 +16,8 @@ Fixed::Fixed(void) // Costruttore di default
 Fixed::Fixed(const Fixed &other)
 {
     std::cout << "Copy constructor called" << std::endl;
-    this->fixed = other.fixed;
+    *this = other;
+    //this->fixed = other.fixed;
 }
 
 // Operatore di assegnazione 
