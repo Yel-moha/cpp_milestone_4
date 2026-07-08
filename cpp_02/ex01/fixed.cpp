@@ -7,10 +7,6 @@ Fixed::Fixed(void) // Costruttore di default
     this->fixed = 0;
     std::cout << "Default constructor called" << std::endl;
 }
-Fixed::Fixed(const int num)
-{
-
-}
 
 // Costruttore di copia: Fixed::Fixed(const Fixed &other)
 // Fixed: È il nome della funzione.
@@ -34,6 +30,35 @@ Fixed &Fixed::operator=(const Fixed &other)
     if (this != &other)
         this->fixed = other.fixed;
     return (*this);
+}
+
+//Questo equivale a `num * 256`, ma usando lo shift bitwise perche' fractionalBits = 8;
+Fixed::Fixed(const int num)
+{
+    std::cout << "Int constructor called" << std::endl;
+    this->fixed = num << fractionalBits;
+}
+
+Fixed::Fixed(const float num)
+{
+    std::cout << "Float constructor called" << std::endl;
+    this->fixed = roundf(num * (1 << fractionalBits));
+}
+
+float Fixed::toFloat(void) const
+{
+    return ((float)this->fixed / (1 << fractionalBits));
+}
+
+int Fixed::toInt(void) const
+{
+    return (this->fixed >> fractionalBits);
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
+{
+    out << fixed.toFloat();
+    return (out);
 }
 
 Fixed::~Fixed()
