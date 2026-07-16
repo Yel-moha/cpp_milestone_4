@@ -16,11 +16,9 @@ Fixed::Fixed(void) // Costruttore di default
 Fixed::Fixed(const Fixed &other)
 {
     std::cout << "Copy constructor called" << std::endl;
-    *this = other;
-    //this->fixed = other.fixed;
+    this->fixed = other.fixed;
 }
 
-// Operatore di assegnazione 
 // Fixed &: La funzione restituisce una reference ad un Fixed.
 // operator= E' semplicemente il nome della funzione.
 //Il compilatore dice questa funzione rappresenta l'operatore =
