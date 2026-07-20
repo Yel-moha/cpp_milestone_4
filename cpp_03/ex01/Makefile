@@ -1,7 +1,8 @@
-NAME = fixed
+NAME = scavtrap
 
 SRCS = main.cpp \
-	fixed.cpp
+	ClapTrap.cpp \
+	ScavTrap.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -14,14 +15,14 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-		rm -f $(OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-		rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
 %.o: %.cpp
-		$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
