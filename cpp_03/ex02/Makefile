@@ -1,27 +1,29 @@
-NAME = fixed
-
-SRCS = main.cpp \
-	fixed.cpp
-
-OBJS = $(SRCS:.cpp=.o)
+NAME = claptrap
 
 CC = c++
-CFLAGS = -Werror -Wextra -Wall -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98
+
+SRCS = main.cpp \
+	   ClapTrap.cpp \
+	   ScavTrap.cpp \
+	   FragTrap.cpp
+
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-		rm -f $(OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-		rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
-
-%.o: %.cpp
-		$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
