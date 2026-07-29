@@ -4,7 +4,7 @@
 
 int main()
 {
-    ClapTrap claptrap("CL4P-TP");
+    ClapTrap claptrap("Clap");
     claptrap.attack("un bersaglio");
     claptrap.takeDamage(5);
     claptrap.beRepaired(3);

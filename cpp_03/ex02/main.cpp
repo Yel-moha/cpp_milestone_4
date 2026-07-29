@@ -2,7 +2,7 @@
 
 int main()
 {
-	FragTrap frag("Jack");
+	FragTrap frag("frag");
 
 	frag.attack("Bandit");
 	frag.takeDamage(20);

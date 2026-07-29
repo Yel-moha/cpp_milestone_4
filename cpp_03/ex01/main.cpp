@@ -2,7 +2,7 @@
 
 int main()
 {
-    ScavTrap scavtrap("SC4V-TP");
+    ScavTrap scavtrap("Scav");
     ScavTrap copy(scavtrap);
     ScavTrap assigned;
 
