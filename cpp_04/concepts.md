@@ -92,6 +92,34 @@ Animal** — che è anche il motivo per cui torna utile il distruttore virtuale
 del punto precedente: senza, il `delete` di un `Dog` polimorfico non
 chiamerebbe mai `~Dog()` e il suo `Brain` farebbe leak.
 
+**Come si verifica concretamente che la copia è deep e non shallow?** Non
+basta "sembrare giusto", va dimostrato con dati: nel `main.cpp` di ex01,
+`getBrain()` (aggiunto apposta a `Dog`/`Cat`, non richiesto dal subject ma
+necessario per *osservare* dall'esterno l'indirizzo del `Brain` privato)
+espone il puntatore, e il test copia un'idea, ne modifica una sull'originale
+e una sulla copia, poi stampa entrambi gli indirizzi:
+
+```cpp
+Dog dog1;
+dog1.getBrain()->setIdea(0, "chase the mailman");
+Dog dog2(dog1);
+dog2.getBrain()->setIdea(0, "take a nap");
+// dog1 brain address: 0x... idea[0]: chase the mailman
+// dog2 brain address: 0x... idea[0]: take a nap   <- indirizzo diverso, valore indipendente
+```
+
+Se la copia fosse stata shallow, i due indirizzi sarebbero risultati
+**identici** e modificare l'idea di `dog2` avrebbe cambiato anche quella di
+`dog1`. Stesso test ripetuto con `Cat` mediante `operator=` (non solo copy
+constructor), perché la shallow copy è un bug possibile in *entrambi* i punti
+dell'OCF, non solo nel costruttore di copia.
+
+**Verificato con `valgrind --leak-check=full`**: 0 leak su tutta l'esecuzione
+di ex01 (subject example, array misto di 6 `Animal*`, test di deep copy,
+`WrongAnimal`/`WrongCat`) — conferma che ogni `new Brain()` allocato nei
+costruttori di `Dog`/`Cat` viene liberato esattamente una volta, anche
+quando l'oggetto viene distrutto tramite un `Animal*` polimorfico.
+
 ## 4. Abstract class e funzioni virtuali pure (ex02)
 
 Ex02 chiede di impedire `new Animal()` diretto: "creare un Animal non ha senso,
@@ -114,6 +142,26 @@ astratte anche loro.
 corpo è ereditabile e ridefinibile ma non obbliga nessuno a farlo, e la classe
 resta istanziabile. `virtual void f() = 0;` obbliga ogni classe concreta
 derivata a implementarla, pena restare anch'essa astratta.
+
+**Verifica concreta che `Animal` è davvero astratta**: non basta fidarsi della
+teoria, va provato che il compilatore rifiuta l'istanziazione. Compilando un
+piccolo file di prova con `Animal a;` si ottiene un errore *in fase di
+compilazione* (non un crash a runtime):
+
+```
+error: variable type 'Animal' is an abstract class
+note: unimplemented pure virtual method 'makeSound' in 'Animal'
+```
+
+Da notare **cosa resta invariato**: `Dog`/`Cat` continuano a essere
+istanziabili (implementano `makeSound()`), e l'array misto di `Animal*`
+usato in ex01 funziona identico in ex02 — il subject lo richiede esplicitamente
+("Everything should work as before"). L'unica riga cambiata rispetto a ex01 è
+`virtual void makeSound(void) const = 0;` al posto della dichiarazione con
+corpo in `Animal.cpp`; nessuna modifica a `Dog`, `Cat` o `Brain`. Anche qui,
+`valgrind --leak-check=full` conferma 0 leak: rendere una classe astratta non
+cambia nulla nella gestione delle risorse, solo nella regola di istanziazione
+verificata dal compilatore.
 
 ## 5. Interfacce (ex03)
 

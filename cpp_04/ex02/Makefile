@@ -1,4 +1,4 @@
-NAME = worldonfire
+NAME = abstractclass
 
 SRCS = main.cpp \
 	Animal.cpp \
